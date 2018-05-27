@@ -13,6 +13,29 @@ RSpec.describe ShortenUrlsController, :type => :controller do
 			expect(parsed_body["message"]).to eq('Success')
 		end
 		
+		it "should not create different short urls for different urls with same domain" do
+			ShortenedUrl.create(:url => 'google.com', :short_url => 'test')
+			post :create, {shortened_url: {url: 'https://www.google.com'}}
+			expect(response).to have_http_status(200)
+			parsed_body = JSON.parse(response.body)
+			expect(parsed_body["short_url"]).to eq('test')
+			
+			post :create, {shortened_url: {url: 'https://google.com'}}
+			expect(response).to have_http_status(200)
+			parsed_body = JSON.parse(response.body)
+			expect(parsed_body["short_url"]).to eq('test')
+			
+			post :create, {shortened_url: {url: 'http://www.google.com'}}
+			expect(response).to have_http_status(200)
+			parsed_body = JSON.parse(response.body)
+			expect(parsed_body["short_url"]).to eq('test')
+			
+			post :create, {shortened_url: {url: 'http://google.com'}}
+			expect(response).to have_http_status(200)
+			parsed_body = JSON.parse(response.body)
+			expect(parsed_body["short_url"]).to eq('test')
+		end
+		
 		it "should not create a short url if the url provided is not valid" do
 			post :create, {shortened_url: {url: 'https:/google.com'}}
 			expect(response).to have_http_status(422)
