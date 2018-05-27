@@ -1,0 +1,5 @@
+<% if @message.present? %>
+  alert('<%= @message %>')
+<% end %>
+$('#short-url').text(window.location.protocol + '//' + window.location.host + '/' + '<%= @short_url %>')
+$('#short-url').attr('href', window.location.protocol + '//' + window.location.host + '/' + '<%= @short_url %>')

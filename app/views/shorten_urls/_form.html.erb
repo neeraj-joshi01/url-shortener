@@ -1,0 +1,17 @@
+<%= form_for @shortened_url , :html => {:class => "span12 widget dark shadowed form-horizontal bordered"}, :url => @url, remote: true do |f| %>
+    <header>
+      <h4>Generate Shortened URL</h4>
+    </header>
+    <section>
+      <div>
+        <div style="padding-top: 20px;">
+          <label>URL</label>
+          <div>
+            <%= f.text_field :url , :class => "span12", :placeholder => "Enter URL",  :required => true %>
+          </div>
+          <a target="_blank" id="short-url"></a>
+          <button type="submit">Save</button>
+        </div>
+      </div>
+    </section>
+<% end %>

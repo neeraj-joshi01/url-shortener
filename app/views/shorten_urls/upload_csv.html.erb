@@ -1,0 +1,18 @@
+<%= form_for @shortened_url , :html => {:class => "span12 widget dark shadowed form-horizontal bordered"}, :url => @url, remote: true do |f| %>
+    <header>
+      <h4>Generate Shortened URL</h4>
+    </header>
+    <section>
+      <div>
+        <div>
+          <label>Upload CSV</label>
+          <div>
+            <%= f.file_field :csv_file , :class => "span3", :placeholder => "CSV File" %>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary save-btn">Save</button>
+          </div>
+        </div>
+      </div>
+    </section>
+<% end %>

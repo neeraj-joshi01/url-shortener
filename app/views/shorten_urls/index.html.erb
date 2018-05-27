@@ -1,0 +1,6 @@
+<a href="/shorten_urls/new">Generate New Shortened URL</a>
+<%= render partial: 'render_data', locals: {shortened_urls: @shortened_urls} %>
+<% if @show_next_page_button %>
+    <a href="/?next_paging_state=<%= @next_paging_state %>">Next</a>
+<% end %>
+<%= link_to "Back", 'javascript:history.back()' %>
